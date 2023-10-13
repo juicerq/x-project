@@ -2,26 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+::selection {
+  background-color: blue; /* Cor de fundo quando o texto é selecionado */
+  color: blueviolet; /* Cor do texto selecionado */
+}
+
+@layer components {
+  .flex-center {
+    @apply flex items-center justify-center;
   }
-}
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  .section-spacing {
+    @apply px-8 md:px-12 pb-12 lg:pb-20 2xl:pb-32 lg:px-16 xl:px-44 2xl:px-64;
+  }
+
+  .highlight {
+    @apply text-mainPalette-primaryButton uppercase;
+  }
+
+  .contact-input-container {
+    @apply flex flex-col w-full gap-2;
+  }
 }

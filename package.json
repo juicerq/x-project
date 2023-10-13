@@ -9,19 +9,32 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "react": "^18",
-    "react-dom": "^18",
-    "next": "13.5.4"
+    "@radix-ui/react-select": "^1.2.2",
+    "@types/node": "20.2.1",
+    "@types/react": "18.2.6",
+    "@types/react-dom": "18.2.4",
+    "autoprefixer": "10.4.14",
+    "axios": "^1.4.0",
+    "clsx": "^1.2.1",
+    "eslint": "8.40.0",
+    "eslint-config-next": "13.4.2",
+    "framer-motion": "^10.12.16",
+    "lucide-react": "^0.220.0",
+    "next": "13.4.2",
+    "postcss": "8.4.23",
+    "prettier": "2.8.8",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-hook-form": "^7.45.4",
+    "react-icons": "^4.10.1",
+    "tailwind-merge": "^1.12.0",
+    "tailwindcss": "3.3.2",
+    "tailwindcss-animate": "^1.0.5",
+    "typescript": "5.0.4"
   },
   "devDependencies": {
-    "typescript": "^5",
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "autoprefixer": "^10",
-    "postcss": "^8",
-    "tailwindcss": "^3",
-    "eslint": "^8",
-    "eslint-config-next": "13.5.4"
+    "@rocketseat/eslint-config": "^1.2.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "prettier-plugin-tailwindcss": "^0.3.0"
   }
 }
