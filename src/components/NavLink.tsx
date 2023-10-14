@@ -7,9 +7,9 @@ type NavLink = {
 
 export default function NavLink({ text, icon }: NavLink) {
   return (
-    <div className="flex w-fit cursor-pointer items-center justify-start gap-4 rounded-2xl py-2 pl-2 pr-4 transition-all hover:bg-mainPalette-textLowlight">
+    <div className="flex w-fit cursor-pointer items-center justify-start gap-4 rounded-full transition-all hover:bg-mainPalette-textLowlight md:p-4 lg:py-2 lg:pl-2 lg:pr-6">
       <div className="text-white">{icon}</div>
-      <li className="text-lg font-bold text-mainPalette-text">{text}</li>
+      <li className="hidden text-lg text-mainPalette-text lg:block">{text}</li>
     </div>
   )
 }
