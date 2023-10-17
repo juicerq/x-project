@@ -13,6 +13,12 @@
   color: black; /* Cor do texto selecionado */
 }
 
+textarea {
+  form-sizing: content;
+  min-height: 2lh;
+  max-height: 10lh;
+}
+
 @layer components {
   .flex-center {
     @apply flex items-center justify-center;

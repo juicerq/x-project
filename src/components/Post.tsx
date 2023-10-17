@@ -45,12 +45,12 @@ export default function Post({
 
         <div className="flex w-full items-center gap-6">
           <div className="group flex cursor-pointer text-zinc-400">
-            <MessageCircle className="rounded-full bg-transparent p-1 transition-all group-hover:bg-blue-500 group-hover:bg-opacity-30 group-hover:text-blue-600" />
+            <MessageCircle className="rounded-full bg-transparent p-1 transition-all group-hover:bg-blue-500 group-hover:bg-opacity-10 group-hover:text-blue-600" />
             <p className="group-hover:text-blue-600">{comments}</p>
           </div>
 
           <div className="group flex cursor-pointer text-zinc-400">
-            <Heart className="rounded-full bg-transparent p-1 transition-all group-hover:bg-red-500 group-hover:bg-opacity-30 group-hover:text-red-600" />
+            <Heart className="rounded-full bg-transparent p-1 transition-all group-hover:bg-red-500 group-hover:bg-opacity-10 group-hover:text-red-600" />
             <p className="transition-all group-hover:text-red-600">{likes}</p>
           </div>
         </div>
