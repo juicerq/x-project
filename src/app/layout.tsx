@@ -1,7 +1,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Roboto_Flex as Roboto } from 'next/font/google'
-import SiderBar from '@/components/layout/SiderBar'
+import SideBar from '@/components/SideBar'
 
 const roboto = Roboto({ subsets: ['latin'], variable: '--font-alt' })
 
@@ -20,7 +20,7 @@ export default function RootLayout({
       <body
         className={`${roboto.variable} z-0 flex overflow-x-hidden bg-black`}
       >
-        <SiderBar />
+        <SideBar />
         {children}
       </body>
     </html>

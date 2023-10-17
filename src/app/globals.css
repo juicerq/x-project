@@ -9,8 +9,8 @@
 }
 
 ::selection {
-  background-color: blue; /* Cor de fundo quando o texto é selecionado */
-  color: blueviolet; /* Cor do texto selecionado */
+  background-color: white; /* Cor de fundo quando o texto é selecionado */
+  color: black; /* Cor do texto selecionado */
 }
 
 @layer components {
@@ -28,5 +28,12 @@
 
   .contact-input-container {
     @apply flex flex-col w-full gap-2;
+  }
+}
+
+@layer utilities {
+  .input-box {
+    word-wrap: break-word;
+    word-break: break-word;
   }
 }
