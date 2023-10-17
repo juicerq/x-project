@@ -5,15 +5,23 @@ type NavLink = {
   text: string
   icon: ReactNode
   url: string
+  isBold: boolean
+  setBold: (text: string) => void
 }
 
-export default function NavLink({ text, icon, url }: NavLink) {
+export default function NavLink({ text, icon, url, isBold, setBold }: NavLink) {
   return (
-    <div className="flex w-fit cursor-pointer items-center justify-start gap-4 rounded-full transition-all hover:bg-mainPalette-textLowlight md:p-4 lg:py-2 lg:pl-2 lg:pr-6">
-      <div className="text-white">{icon}</div>
-      <li className="hidden text-lg text-mainPalette-text lg:block">
-        <Link href={url}>{text}</Link>
-      </li>
-    </div>
+    <li className={`text-lg text-mainPalette-text`}>
+      <Link
+        href={url}
+        onClick={() => setBold(text)}
+        className={`flex w-fit gap-4 rounded-full transition-all hover:bg-mainPalette-textLowlight md:p-4 lg:py-2 lg:pr-6 ${
+          isBold && 'font-bold'
+        }`}
+      >
+        <div className="text-white md:h-8 md:w-8 lg:h-6 lg:w-6">{icon}</div>
+        <p className="hidden lg:block">{text}</p>
+      </Link>
+    </li>
   )
 }

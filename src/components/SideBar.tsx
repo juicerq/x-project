@@ -1,5 +1,5 @@
-import { X, Home, Search, Bell, MoreHorizontal, Feather } from 'lucide-react'
-import NavLink from './NavLink'
+import { X, MoreHorizontal, Feather } from 'lucide-react'
+import NavList from './NavList'
 
 export default function SideBar() {
   return (
@@ -9,26 +9,9 @@ export default function SideBar() {
           <X size={35} />
         </div>
 
-        <nav>
-          <ul className="flex flex-col gap-2 p-0">
-            <NavLink
-              text="Home"
-              icon={<Home className="md:h-8 md:w-8 lg:h-6 lg:w-6" />}
-              url="/"
-            />
-            <NavLink
-              text="Explore"
-              icon={<Search className="md:h-8 md:w-8 lg:h-6 lg:w-6" />}
-              url="/explore"
-            />
-            {/* <NavLink
-              text="Notifications"
-              icon={<Bell className="md:h-8 md:w-8 lg:h-6 lg:w-6" />}
-            /> */}
-          </ul>
-        </nav>
+        <NavList />
 
-        <button className="lg:flex-center rounded-full bg-blue-500 font-bold text-mainPalette-text hover:bg-blue-400 active:scale-95 md:p-4 lg:flex lg:h-fit lg:w-full lg:rounded-full lg:py-2 2xl:px-6">
+        <button className="lg:flex-center rounded-full bg-blue-500 font-bold text-mainPalette-text hover:bg-blue-400 md:p-4 lg:flex lg:h-fit lg:w-full lg:rounded-full lg:py-2 2xl:px-6">
           <Feather size={10} className="hidden text-white md:block lg:hidden" />
           <span className="hidden text-xl lg:block">Post</span>
         </button>
