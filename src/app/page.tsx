@@ -5,7 +5,7 @@ import Post from '@/components/Post'
 
 export default function Home() {
   return (
-    <main className="relative h-[2000px] w-screen border-x border-mainPalette-textLowlight lg:w-[550px]">
+    <main className="relative w-screen border-x border-mainPalette-textLowlight lg:w-[550px]">
       <div className="fixed w-screen items-center border-x border-b border-mainPalette-textLowlight bg-black bg-opacity-50 backdrop-blur-xl lg:w-[550px] lg:-translate-x-[1px]">
         <button className="h-fit p-2 text-xl font-bold text-mainPalette-text lg:h-10">
           Home
