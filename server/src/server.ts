@@ -1,6 +1,5 @@
 import express from 'express'
 import cors from 'cors'
-import JWT from 'jsonwebtoken'
 import mongoose from 'mongoose'
 
 import postRoutes from './routes/post'

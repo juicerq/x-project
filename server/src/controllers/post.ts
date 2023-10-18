@@ -1,44 +1,77 @@
+import { Request, Response } from 'express'
 import { Post } from '../models/post'
 import { Comment } from '../models/comment'
-import { Request, Response } from 'express'
+import { object, string } from 'zod'
+import { ObjectId } from 'mongodb'
+import { verifyToken } from '../middleware/jwtverify'
 
-// Create a new post
+// Define a custom zod schema for ObjectId validation
+const objectIdSchema = string().refine((value) => ObjectId.isValid(value), {
+  message: 'Invalid ObjectId',
+})
+
+// Zod schemas for request validation
+const createPostSchema = object({
+  userId: objectIdSchema,
+  content: string().min(1),
+})
+
+const likePostSchema = object({
+  postId: objectIdSchema,
+  userId: objectIdSchema,
+})
+
+const createCommentSchema = object({
+  postId: objectIdSchema,
+  userId: objectIdSchema,
+  content: string().min(1),
+})
+
 export const createPost = async (req: Request, res: Response) => {
   try {
-    const { user, content } = req.body
-    const newPost = new Post({ user, content })
+    await verifyToken(req, res)
+
+    const { userId, content } = createPostSchema.parse(req.body)
+
+    const newPost = new Post({ userId, content })
     await newPost.save()
     res.status(201).json(newPost)
   } catch (error) {
-    res.status(500).json({ error: 'Unable to create a post.' })
+    res.status(400).json({ error: 'Invalid data provided.' })
   }
 }
 
-// Like a post
 export const likePost = async (req: Request, res: Response) => {
   try {
-    const { postId, userId } = req.body
+    await verifyToken(req, res)
+
+    const { postId, userId } = likePostSchema.parse(req.body)
     const post = await Post.findById(postId)
 
     if (!post) {
       return res.status(404).json({ error: 'Post not found.' })
     }
 
-    if (!post.likes.includes(userId)) {
-      post.likes.push(userId)
+    // Convert the userId to ObjectId
+    const userIdObjectId = new ObjectId(userId)
+
+    if (!post.likes.map(String).includes(userIdObjectId.toString())) {
+      post.likes.push(userIdObjectId)
       await post.save()
     }
 
     res.status(200).json(post)
   } catch (error) {
-    res.status(500).json({ error: 'Unable to like the post.' })
+    res.status(400).json({ error: 'Invalid data provided.' })
   }
 }
 
 // Create a comment on a post
 export const createComment = async (req: Request, res: Response) => {
   try {
-    const { postId, userId, content } = req.body
+    await verifyToken(req, res)
+
+    const { postId, userId, content } = createCommentSchema.parse(req.body)
     const post = await Post.findById(postId)
 
     if (!post) {
@@ -54,6 +87,6 @@ export const createComment = async (req: Request, res: Response) => {
 
     res.status(201).json(newComment)
   } catch (error) {
-    res.status(500).json({ error: 'Unable to create a comment.' })
+    res.status(400).json({ error: 'Invalid data provided.' })
   }
 }
