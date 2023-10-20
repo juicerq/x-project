@@ -1,17 +1,20 @@
 import { Request, Response } from 'express'
 import { User } from '../models/user'
-import { JWT_SECRET } from '../middleware/jwtverify'
+import { config } from 'dotenv'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
-import { object, string } from 'zod'
+import { date, object, string } from 'zod'
 
-const jwtSecret = JWT_SECRET
+config()
+const JWT_SECRET = process.env.JWT_SECRET as string
+
 const SALT_ROUNDS = 10
 
 // Zod schemas for request validation
 const registrationSchema = object({
   username: string(),
   email: string().email(),
+  birthDate: date(),
   password: string().min(8),
 })
 
@@ -23,7 +26,9 @@ const loginSchema = object({
 // Register a new user
 export const registerUser = async (req: Request, res: Response) => {
   try {
-    const { username, email, password } = registrationSchema.parse(req.body)
+    const { username, email, birthDate, password } = registrationSchema.parse(
+      req.body,
+    )
 
     // Check if the user already exists
     const existingUser = await User.findOne({ email })
@@ -35,20 +40,24 @@ export const registerUser = async (req: Request, res: Response) => {
     // Hash the password before storing for safety
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS)
 
-    const newUser = new User({ username, email, password: hashedPassword })
+    const newUser = new User({
+      username,
+      email,
+      birthDate,
+      password: hashedPassword,
+    })
     await newUser.save()
 
     // Generate a JWT token for the user
     const token = jwt.sign(
       { userId: newUser._id, userEmail: newUser.email },
-      jwtSecret,
+      JWT_SECRET,
       {
         expiresIn: '7d',
       },
     )
 
     res.status(201).json({ user: newUser, token })
-    return token
   } catch (error) {
     res.status(400).json({ error: 'Invalid data provided.' })
   }
@@ -77,7 +86,6 @@ export const loginUser = async (req: Request, res: Response) => {
     })
 
     res.status(200).json({ message: 'Login successful', user, token })
-    return token
   } catch (error) {
     res.status(400).json({ error: 'Invalid data provided.' })
   }

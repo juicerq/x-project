@@ -1,6 +1,8 @@
 import { Request, Response } from 'express'
+import { config } from 'dotenv'
 
-export const JWT_SECRET = 'juisecretkey93812382193821983'
+config()
+export const JWT_SECRET = process.env.JWT_SECRET
 
 export async function verifyToken(req: Request, res: Response) {
   const token = req.header('Authorization')

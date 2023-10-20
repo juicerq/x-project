@@ -3,7 +3,7 @@ import { Post } from '../models/post'
 import { Comment } from '../models/comment'
 import { object, string } from 'zod'
 import { ObjectId } from 'mongodb'
-import { verifyToken } from '../middleware/jwtverify'
+import { verifyToken } from '../middleware/verifyToken'
 
 // Define a custom zod schema for ObjectId validation
 const objectIdSchema = string().refine((value) => ObjectId.isValid(value), {
